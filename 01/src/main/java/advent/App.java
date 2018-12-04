@@ -3,12 +3,143 @@
  */
 package advent;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+import org.checkerframework.checker.units.qual.A;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+	private int sum;
+	private List<Integer> frequencies;
+	private Integer firstFrequency;
+	private boolean found;
 
-    }}
+	public App() {
+		this.firstFrequency = null;
+		this.frequencies = new ArrayList<Integer>();
+		this.sum = 0;
+		this.found = false;
+	}
+
+	public List<Integer> getFrequencies() {
+		return frequencies;
+	}
+
+	public static void main(String[] args) {
+
+		App app = new App();
+		List<String> inputs = app.getInputs();
+		int count = 0;
+
+		while (!(app.found)) {
+
+			app.run(inputs);
+			System.out.println(++count);
+		}
+
+		System.out.println(app.getSum());
+		System.out.println(app.getFrequencies().size());
+		System.out.println("FIRST FREQ: " + app.getFirstFrequency());
+
+		// app.checkFrewqw();
+
+	}
+
+	public void checkFrewqw() {
+		List<Integer> list = getFrequencies();
+
+		Collections.sort(list);
+
+		for (Integer in : list) {
+			System.out.println(in);
+		}
+	}
+
+	public void run(List<String> inputs) {
+
+		for (String in : inputs) {
+
+			if (checkFrequency()) {
+				System.out.println("FOUND");
+				this.found = true;
+
+			}
+
+			addNumber(in);
+
+		}
+
+	}
+
+	private void addNumber(String number) {
+
+		char operator = number.charAt(0);
+
+		int num = Integer.parseInt(number.substring(1));
+
+		switch (operator) {
+		case '+':
+			setSum(num);
+			break;
+		case '-':
+			setSum(-num);
+			break;
+		}
+
+	}
+
+	private boolean checkFrequency() {
+
+		Integer currentResult = (Integer) getSum();
+
+		if (getFrequencies().contains(currentResult) && getFirstFrequency() == null && getFrequencies().size() > 0) {
+			setFirstFrequency(currentResult);
+			return true;
+		}
+		getFrequencies().add(currentResult);
+
+		return false;
+	}
+
+	private void setFirstFrequency(Integer res) {
+		this.firstFrequency = res;
+	}
+
+	private Integer getFirstFrequency() {
+		return this.firstFrequency;
+	}
+
+	private void setSum(int num) {
+		this.sum += num;
+	}
+
+	private int getSum() {
+		return this.sum;
+	}
+
+	private List<String> getInputs() {
+		List<String> inputs = new ArrayList<String>();
+
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		File file = new File(classLoader.getResource("input.txt").getFile());
+		try (Scanner scanner = new Scanner(file)) {
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				inputs.add(line);
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return inputs;
+
+	}
+}

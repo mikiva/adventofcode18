@@ -17,7 +17,7 @@ plugins {
 
 eclipse {
     project {
-        name = 'advent-01'
+        name = 'advent-02'
     }
 }
 

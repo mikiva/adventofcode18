@@ -8,13 +8,22 @@
 
 
 apply plugin: 'java'
-repositories {
-    flatDir {
-        dirs 'libs'
+
+allprojects {
+    repositories {
+        flatDir {
+            dirs "$rootProject.projectDir/libs"
+        
+        }
+    }
+
+    pluginManager.withPlugin('java') 
+    {
+        dependencies 
+        {
+            compile files("$rootProject.projectDir/libs/read-input.jar")
+            //compile name: 'advent:read-input:1.0'
+            //compile 'lib.advent:ReadInput:1.0'
+        }
     }
 }
-    dependencies {
-
-        compile name: 'advent:read-input:1.0'
-    }
-

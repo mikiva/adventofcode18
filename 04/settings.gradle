@@ -7,9 +7,4 @@
  * in the user guide at https://docs.gradle.org/5.0/userguide/multi_project_builds.html
  */
 
-include '01'
-include '02'
-include '03'
-include '04'
-
-rootProject.name = 'adventofcode'
+rootProject.name = 'advent-04'

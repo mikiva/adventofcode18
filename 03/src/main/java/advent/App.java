@@ -21,10 +21,11 @@ public class App {
 		App app = new App(ReadInput.getInput());
 		app.run();
 	}
+
 	private void run() {
-		
+
 		Fabric fabric = new Fabric();
-		
+
 		fabric.setClaims(claims);
 
 		System.out.println("Overlap size: " + fabric.checkOverlaps());

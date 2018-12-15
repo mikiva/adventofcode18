@@ -8,10 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
-import org.checkerframework.checker.units.qual.A;
 
 public class App {
 
@@ -19,12 +20,14 @@ public class App {
 	private List<Integer> frequencies;
 	private Integer firstFrequency;
 	private boolean found;
+	private Set<Integer> set;
 
 	public App() {
 		this.firstFrequency = null;
 		this.frequencies = new ArrayList<Integer>();
 		this.sum = 0;
 		this.found = false;
+		this.set = new HashSet<>();
 	}
 
 	public List<Integer> getFrequencies() {
@@ -33,48 +36,58 @@ public class App {
 
 	public static void main(String[] args) {
 
+		System.out.println("Sum at end: " + part1());
+		System.out.println("First repeated: " +part2());
+
+	}
+	private static Integer part1()
+	{
+
 		App app = new App();
 		List<String> inputs = app.getInputs();
-		int count = 0;
 
+		int sum = app.addP1(inputs);
+
+
+		return sum;
+	}
+	private static Integer part2()
+	{
+		App app = new App();
+		List<String> inputs = app.getInputs();
 		while (!(app.found)) {
 
 			app.run(inputs);
-			System.out.println(++count);
 		}
 
-		System.out.println(app.getSum());
-		System.out.println(app.getFrequencies().size());
-		System.out.println("FIRST FREQ: " + app.getFirstFrequency());
-
-		// app.checkFrewqw();
+		return app.getSum();
 
 	}
 
-	public void checkFrewqw() {
-		List<Integer> list = getFrequencies();
-
-		Collections.sort(list);
-
-		for (Integer in : list) {
-			System.out.println(in);
+	public int addP1(List<String> input)
+	{
+		int sum = 0;
+		for(String s : input)
+		{
+			sum += Integer.parseInt(s);
 		}
+		return sum;
 	}
 
 	public void run(List<String> inputs) {
-
 		for (String in : inputs) {
-
-			if (checkFrequency()) {
-				System.out.println("FOUND");
+			
+			
+			if (!checkFrequency()) {
 				this.found = true;
-
+				return;
+				
 			}
-
+			
 			addNumber(in);
-
+			
 		}
-
+		
 	}
 
 	private void addNumber(String number) {
@@ -97,22 +110,7 @@ public class App {
 	private boolean checkFrequency() {
 
 		Integer currentResult = (Integer) getSum();
-
-		if (getFrequencies().contains(currentResult) && getFirstFrequency() == null && getFrequencies().size() > 0) {
-			setFirstFrequency(currentResult);
-			return true;
-		}
-		getFrequencies().add(currentResult);
-
-		return false;
-	}
-
-	private void setFirstFrequency(Integer res) {
-		this.firstFrequency = res;
-	}
-
-	private Integer getFirstFrequency() {
-		return this.firstFrequency;
+		return set.add(currentResult);
 	}
 
 	private void setSum(int num) {

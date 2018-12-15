@@ -17,7 +17,10 @@ plugins {
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+  maven {
+    url "http://repo.maven.apache.org/maven2/"
+}
+    mavenCentral()
 }
 
 dependencies {
@@ -26,7 +29,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    compile files("D:/git/adventofcode/libs/read-input.jar")
+    compile files("../libs/read-input.jar")
 }
 
 // Define the main class for the application

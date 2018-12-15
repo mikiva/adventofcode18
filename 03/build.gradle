@@ -34,13 +34,13 @@ maven {
 dependencies {
 
     // This dependency is found on compile classpath of this component and consumers.
-    implementation 'com.google.guava:guava:26.0-jre'
+    //implementation 'com.google.guava:guava:26.0-jre'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     print "$rootDir\\libs\\read-input.jar \n"
     
-    compile files("D:/git/adventofcode/libs/read-input.jar")
+    compile files("../libs/read-input.jar")
    
 
     //compile files('read-input.jar')

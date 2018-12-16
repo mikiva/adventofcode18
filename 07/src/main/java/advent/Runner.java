@@ -19,6 +19,7 @@ public class Runner
 	private List<String> steps;
 	private List<Character> stepsToDo;
 	private char[] alphabet;
+	private final int MIN_WORK_TIME = 60;
 
 	public Runner(List<String> steps)
 	{
@@ -39,11 +40,22 @@ public class Runner
 
 	public String part2()
 	{
-		
-		
-		
-		
-		
+		Map<Character, List<Character>> map = setUpSteps();
+
+Set<Character> finished = new LinkedHashSet<>();
+		Set<Character> sortedSteps = new TreeSet<>();
+		for(String str : steps)
+		{
+			sortedSteps.add(getStep(str)[0]);
+			sortedSteps.add(getStep(str)[1]);
+		}
+
+
+
+
+
+
+
 		return "String";
 	}
 	
